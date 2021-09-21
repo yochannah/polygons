@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
     w: seed.width.baseVal.value
   };
 
-  createPolygon()
+  createPolygon(generatePoints(), "#005577");
 
 });
 
@@ -26,6 +26,8 @@ function generatePoints() {
 
 function createPolygon(points, fill) {
   let polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-  polygon.setAttribute("points", generatePoints());
+  polygon.setAttribute("points", points);
+  polygon.setAttribute("fill", fill);
+  polygon.setAttribute("fill-opacity", 0.23);
   seed.appendChild(polygon);
 }
