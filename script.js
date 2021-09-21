@@ -26,11 +26,21 @@ document.addEventListener("DOMContentLoaded", function() {
 //from MDN thx https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandomInt(original, size, bounds) {
   console.log(original);
-  let newNum = original + Math.floor(Math.random() * size);
-  if ((newNum > bounds.w)) {
+  let negative = Math.random() <= 0.45;
+  let newNum = original;
+  if (negative) {
+    newNum = newNum - Math.floor(Math.random() * size);
+  } else {
+    newNum = original + Math.floor(Math.random() * size);
+  }
+
+  if (newNum <= 0)
+  {newNum = 0;}
+
+  if (newNum > bounds.w) {
     return bounds.w;
   }
-  if ((newNum > bounds.h)) {
+  if (newNum > bounds.h) {
     return bounds.h;
   }
   return newNum;
@@ -50,7 +60,7 @@ function generatePoints(numberOfPoints, middle) {
       [100, 20]
     ],
     resultSet = [],
-    size = 30;
+    size = middle.h + middle.w / numberOfPoints / 2;
   for (var i = 0; i < numberOfPoints; i++) {
     if (i > 0) {
       resultSet.push([
